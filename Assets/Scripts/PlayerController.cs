@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private new Rigidbody rigidbody;
+    public new Rigidbody rigidbody;
     public new Camera camera;
     public int moveSpeed;
     public int lookSpeed;
@@ -19,15 +20,16 @@ public class PlayerController : MonoBehaviour
     }
 
     public void RotatePlayer() {
-        RaycastHit hit;
+        Plane lookPlane = new Plane(Vector3.up, transform.position);
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        float enter = 0.0f;
         
-        if (Physics.Raycast(ray, out hit)) {
-            Vector3 hitpoint = hit.point;
-            hitpoint.y = transform.position.y;
-            var targetRotation = Quaternion.LookRotation(hitpoint - transform.position);
+        if (lookPlane.Raycast(ray, out enter)) {
+            Vector3 hitPoint = ray.GetPoint(enter);
+            hitPoint.y = transform.position.y;
+            var targetRotation = Quaternion.LookRotation(hitPoint - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lookSpeed * Time.deltaTime);
-            Debug.DrawLine(ray.origin, hitpoint, Color.red);
+            Debug.DrawLine(ray.origin, hitPoint, Color.red);
         }
     }
 
@@ -40,4 +42,5 @@ public class PlayerController : MonoBehaviour
         currentVelocity.z = vertical * moveSpeed;
         rigidbody.velocity = currentVelocity;
     }
+
 }
