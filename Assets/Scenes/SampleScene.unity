@@ -119,7 +119,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 30bf5a027db675143aa3cd0fcca0019a, type: 2}
 --- !u!1 &104633710
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 104633716}
   - component: {fileID: 104633715}
   - component: {fileID: 104633717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,6 +237,9 @@ MonoBehaviour:
   damage: 1
   detectionRadius: 5
   maxAttackAngle: 60
+  overlapMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!54 &104633716
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -594,31 +597,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1267706628 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4719610222829333253, guid: 96c687335d1fdf044b168343765ea5c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 4719610221612548097}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1267706629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267706628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad0fea9ca83161540b39e3eae2e1ba6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  curHealth: 10
-  healthPrefab: {fileID: 6634044158759489023, guid: f6c921cd9997ffd458b4608b9bca2676,
-    type: 3}
-  holder: {fileID: 1131167210}
-  camera: {fileID: 963194227}
-  offset: {x: 0, y: 1.75, z: 0}
 --- !u!1 &1282203667
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +614,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1282203668
 BoxCollider:
@@ -1059,6 +1037,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267706629, guid: 96c687335d1fdf044b168343765ea5c9, type: 3}
+      propertyPath: holder
+      value: 
+      objectReference: {fileID: 1131167210}
+    - target: {fileID: 1267706629, guid: 96c687335d1fdf044b168343765ea5c9, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 1267706634, guid: 96c687335d1fdf044b168343765ea5c9, type: 3}
+      propertyPath: overlapMask.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96c687335d1fdf044b168343765ea5c9, type: 3}

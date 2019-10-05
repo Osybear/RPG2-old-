@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public int damage;
     public float detectionRadius;
     public float maxAttackAngle;
+    public LayerMask overlapMask;
 
     private void Awake() {
         rigidbody = GetComponent<Rigidbody>();
@@ -49,19 +50,17 @@ public class PlayerController : MonoBehaviour
     }
 
     public GameObject GetNearestUnit() {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, overlapMask);
         float lastAngle = float.MaxValue;
         GameObject lastCol = null;
 
         foreach(Collider col in hitColliders){
-            if(!col.name.Contains("Enemy"))
+            if(col.gameObject == this.gameObject)
                 continue;
+                
+            Vector3 targetDir = col.transform.position - transform.position;
+            float angle = Vector3.Angle(targetDir, transform.forward);
 
-            float a = Vector3.Distance(transform.position + (transform.forward * detectionRadius), col.transform.position);
-            float b = detectionRadius;
-            float c = Vector3.Distance(transform.position, col.transform.position);
-            float angle = Mathf.Acos(((b * b) + (c * c) - (a * a)) / (2 * b * c)) * Mathf.Rad2Deg;
-            Debug.Log("LastAngle : " + angle);
             if(angle < lastAngle) {
                 lastCol = col.gameObject;
                 lastAngle = angle;
