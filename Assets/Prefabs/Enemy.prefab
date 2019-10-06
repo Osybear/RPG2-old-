@@ -150,3 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 4129948265423592377}
+  overlapMask:
+    serializedVersion: 2
+    m_Bits: 512
+  aggroPlayer: {fileID: 0}
+  radius: 20

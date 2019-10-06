@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject GetNearestUnit() {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, overlapMask);
-        float lastAngle = float.MaxValue;
-        GameObject lastCol = null;
+        float smallestAngle = float.MaxValue;
+        GameObject tempObj = null;
 
         foreach(Collider col in hitColliders){
             if(col.gameObject == this.gameObject)
@@ -61,14 +61,14 @@ public class PlayerController : MonoBehaviour
             Vector3 targetDir = col.transform.position - transform.position;
             float angle = Vector3.Angle(targetDir, transform.forward);
 
-            if(angle < lastAngle) {
-                lastCol = col.gameObject;
-                lastAngle = angle;
+            if(angle < smallestAngle) {
+                tempObj = col.gameObject;
+                smallestAngle = angle;
             }
         }
     
-        if(lastAngle < maxAttackAngle)
-            return lastCol;
+        if(smallestAngle < maxAttackAngle)
+            return tempObj;
         return null;
     }
 
