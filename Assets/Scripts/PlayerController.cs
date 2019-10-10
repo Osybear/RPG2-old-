@@ -79,10 +79,6 @@ public class PlayerController : MonoBehaviour
             return; 
         
         Health health = unit.GetComponent<Health>();
-
-        if(health == null)
-            return;
-
         health.OnDamage(damage);
     }
 }

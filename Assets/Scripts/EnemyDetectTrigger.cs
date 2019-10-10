@@ -7,7 +7,7 @@ public class EnemyDetectTrigger : MonoBehaviour
     private EnemyController enemyController;
 
     private void Awake() {
-        transform.parent.GetComponent<EnemyController>();
+        enemyController = transform.parent.GetComponent<EnemyController>();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -19,6 +19,6 @@ public class EnemyDetectTrigger : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
-        enemyController.SetAgentToPlayer(other);
+        enemyController.SetAgentDestination(other);
     }
 }

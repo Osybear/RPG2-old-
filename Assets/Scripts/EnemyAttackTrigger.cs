@@ -7,18 +7,14 @@ public class EnemyAttackTrigger : MonoBehaviour
     private EnemyController enemyController;
 
     private void Awake() {
-        transform.parent.GetComponent<EnemyController>();
+        enemyController = transform.parent.GetComponent<EnemyController>();
     }
 
     private void OnTriggerEnter(Collider other) {
-        
+        enemyController.AttackPlayer(other);
     }
 
     private void OnTriggerExit(Collider other) {
-        
-    }
-
-    private void OnTriggerStay(Collider other) {
-        
+        enemyController.StopAttackPlayer(other);
     }
 }
