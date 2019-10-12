@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         RotatePlayer();
         if(Input.GetMouseButtonDown(0))
-            AttackUnit();
+            AttackEnemy();
     }
 
     public void RotatePlayer() {
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         rigidbody.velocity = currentVelocity;
     }
 
-    public GameObject GetNearestUnit() {
+    public GameObject GetNearestEnemy() {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5, overlapMask);
         float smallestAngle = float.MaxValue;
         GameObject tempObj = null;
@@ -72,13 +72,13 @@ public class PlayerController : MonoBehaviour
         return null;
     }
 
-    public void AttackUnit() {
-        GameObject unit = GetNearestUnit();
+    public void AttackEnemy() {
+        GameObject unit = GetNearestEnemy();
 
         if(unit == null)
             return; 
         
         Health health = unit.GetComponent<Health>();
-        health.OnDamage(damage);
+        health.Damage(damage);
     }
 }

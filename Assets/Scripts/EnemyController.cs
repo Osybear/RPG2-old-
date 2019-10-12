@@ -49,7 +49,7 @@ public class EnemyController : MonoBehaviour
         while(true) {
             yield return new WaitForSeconds(attackSpeed);
             Health health = aggroPlayer.GetComponent<Health>();
-            health.OnDamage(damage);
+            health.Damage(damage);
         }
     }
 }

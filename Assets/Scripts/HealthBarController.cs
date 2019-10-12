@@ -1,22 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour
-{
-    public int maxHealth;
-    public int curHealth;
-
+public class HealthBarController : MonoBehaviour
+{   
     private GameObject healthBar;
+    public GameObject healthBarPrefab;
     private Image healthImage;
-    public GameObject healthPrefab;
-    public Transform holder;
     public new Camera camera;
+    public Transform holder;
     public Vector3 offset;
 
     private void Awake() {
-        healthBar = Instantiate(healthPrefab);
+        healthBar = Instantiate(healthBarPrefab);
         healthBar.transform.SetParent(holder);
         healthImage = healthBar.GetComponent<Image>();
     }
@@ -25,13 +22,9 @@ public class Health : MonoBehaviour
         healthBar.transform.position = camera.WorldToScreenPoint(transform.position + offset);
     }
 
-    public void Damage(int amount) {
-         curHealth = curHealth - amount;
-         SetHealthBar();
-    }
-    
     public void SetHealthBar() {
-        float fillPercentage = (float)curHealth / maxHealth;
-        healthImage.fillAmount = fillPercentage;
+        //float fillPercentage = (float)curHealth / maxHealth;
+        //healthImage.fillAmount = fillPercentage;
     }
+
 }   
