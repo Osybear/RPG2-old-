@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class AIController : MonoBehaviour
 {   
     private NavMeshAgent agent;
     private Coroutine attackRoutine;
@@ -15,6 +14,14 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();    
     }
 
+    public IEnumerator AttackPlayerOverTime() {
+        while(true) {
+            yield return new WaitForSeconds(attackSpeed);
+            HealthController health = aggroPlayer.GetComponent<HealthController>();
+            health.Damage(damage);
+        }
+    }
+    
     public void AggroPlayer(Collider other) {
         if(aggroPlayer == null) 
             aggroPlayer = other;
@@ -42,14 +49,6 @@ public class EnemyController : MonoBehaviour
         if(other == aggroPlayer) {
             StopCoroutine(attackRoutine);
             //agent.isStopped = false;
-        }
-    }
-
-    public IEnumerator AttackPlayerOverTime() {
-        while(true) {
-            yield return new WaitForSeconds(attackSpeed);
-            Health health = aggroPlayer.GetComponent<Health>();
-            health.Damage(damage);
         }
     }
 }
